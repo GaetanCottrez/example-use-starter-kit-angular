@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  clientIdElasticpath: '1NgdZlkNCJ5miRkpQ0ly75HOZOFM0rKf2taUujquog',
+  endpointElasticpathURL: 'api.moltin.com'
 };
 
 /*

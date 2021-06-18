@@ -1,0 +1,12 @@
+<div class="alert alert-danger" *ngIf="!online">
+  Connexion : <strong> pas de réseau</strong>
+</div>
+<app-base-header>
+  <ng-content select=".vt-header"></ng-content>
+</app-base-header>
+<app-base-menu>
+  <ng-content select=".vt-menu"></ng-content>
+</app-base-menu>
+<app-base-main><ng-content></ng-content></app-base-main>
+<app-base-footer *ngIf="footer"><ng-content select=".vt-footer"></ng-content></app-base-footer>
+<app-base-modal *ngIf="modal"><ng-content select=".vt-modal"></ng-content></app-base-modal>

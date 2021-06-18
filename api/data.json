@@ -1,0 +1,47 @@
+{
+  "messages": [
+    {
+      "id": 1,
+      "text": "Mon message 1",
+      "author": {
+        "name": "John Doe"
+      }
+    },
+    {
+      "id": 2,
+      "text": "mon message 2",
+      "author": {
+        "name": "John Wick"
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "priority": 1,
+      "label": "Task 1",
+      "date": {
+        "creation": 1622033348,
+        "due": 1622033348
+      }
+    },
+    {
+      "id": 2,
+      "priority": 2,
+      "label": "Task 2",
+      "date": {
+        "creation": 1622033348,
+        "due": 1622033348
+      }
+    },
+    {
+      "id": 3,
+      "priority": 3,
+      "label": "Task 2",
+      "date": {
+        "creation": 1622033348,
+        "due": 1622033348
+      }
+    }
+  ]
+}
