@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ViewMediatorService } from './core/mediators/vm/view-mediator.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +8,5 @@ import { ViewMediatorService } from './core/mediators/vm/view-mediator.service';
 export class AppComponent {
   title = 'dashboard';
 
-  constructor(public vm: ViewMediatorService) {}
+  constructor() {}
 }

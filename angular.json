@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "storefront-phildar": {
+    "angular-starter-kit": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -34,7 +34,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/@nebular/theme/styles/prebuilt/default.css"
             ],
             "scripts": []
           },
@@ -75,10 +76,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "storefront-phildar:build:production"
+              "browserTarget": "angular-starter-kit:build:production"
             },
             "development": {
-              "browserTarget": "storefront-phildar:build:development"
+              "browserTarget": "angular-starter-kit:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +87,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "storefront-phildar:build"
+            "browserTarget": "angular-starter-kit:build"
           }
         },
         "test": {
@@ -102,50 +103,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/@nebular/theme/styles/prebuilt/default.css"
             ],
             "scripts": []
           }
-        },
-        "server": {
-          "builder": "@angular-devkit/build-angular:server",
-          "options": {
-            "outputPath": "dist/server",
-            "main": "server.ts",
-            "tsConfig": "tsconfig.server.json",
-            "inlineStyleLanguage": "scss"
-          },
-          "configurations": {
-            "production": {
-              "outputHashing": "media",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ]
-            },
-            "development": {
-              "optimization": false,
-              "sourceMap": true,
-              "extractLicenses": false
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve-ssr": {
-          "builder": "@nguniversal/builders:ssr-dev-server",
-          "configurations": {
-            "development": {
-              "browserTarget": "storefront-phildar:build:development",
-              "serverTarget": "storefront-phildar:server:development"
-            },
-            "production": {
-              "browserTarget": "storefront-phildar:build:production",
-              "serverTarget": "storefront-phildar:server:production"
-            }
-          },
-          "defaultConfiguration": "development"
         },
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
@@ -156,12 +118,12 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "storefront-phildar:build:production",
-              "serverTarget": "storefront-phildar:server:production"
+              "browserTarget": "angular-starter-kit:build:production",
+              "serverTarget": "angular-starter-kit:server:production"
             },
             "development": {
-              "browserTarget": "storefront-phildar:build:development",
-              "serverTarget": "storefront-phildar:server:development"
+              "browserTarget": "angular-starter-kit:build:development",
+              "serverTarget": "angular-starter-kit:server:development"
             }
           },
           "defaultConfiguration": "production"
@@ -169,5 +131,5 @@
       }
     }
   },
-  "defaultProject": "storefront-phildar"
+  "defaultProject": "angular-starter-kit"
 }

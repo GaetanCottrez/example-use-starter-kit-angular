@@ -1,12 +1,39 @@
 import { NgModule } from '@angular/core';
-import { MessageModule } from './message/message.module';
-import { TaskModule } from './task/task.module';
-import { AboutComponent } from './about/about.component';
+import {TodoComponent} from "./todo/todo.component";
+import {
+  NbButtonModule,
+  NbCardModule,
+  NbCheckboxModule,
+  NbIconModule,
+  NbInputModule,
+  NbListModule,
+  NbSelectModule
+} from "@nebular/theme";
+import {TodoItemComponent} from "./todo/todo-item/todo-item.component";
+import {CommonModule} from "@angular/common";
+import {NbEvaIconsModule} from "@nebular/eva-icons";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
-    AboutComponent
+    TodoComponent,
+    TodoItemComponent
   ],
-  exports: [MessageModule, TaskModule, AboutComponent]
+  imports: [
+    NbCardModule,
+    NbListModule,
+    NbSelectModule,
+    NbEvaIconsModule,
+    NbCardModule,
+    NbInputModule,
+    NbButtonModule,
+    NbIconModule,
+    NbListModule,
+    NbCheckboxModule,
+    NbSelectModule,
+    FormsModule,
+    CommonModule
+  ],
+  exports: [TodoComponent]
 })
 export class FeatureModule {}

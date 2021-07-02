@@ -9,8 +9,4 @@ export class ViewHomeComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
-  handleModal(event: boolean){
-    console.log(event)
-  }
 }
