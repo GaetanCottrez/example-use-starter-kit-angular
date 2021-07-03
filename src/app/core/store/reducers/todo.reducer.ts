@@ -6,10 +6,10 @@ import {
   loadTodos,
   loadTodosSuccess,
   onEditTodo,
-  onEditTodoFailure
-} from '../../store/actions/todo.actions';
+  updateTodoSuccess
+} from '../actions/todo.actions';
 import { tap } from 'rxjs/operators';
-import {Todo} from "../../interfaces/todo";
+import { Todo } from '../../interfaces/todo';
 
 export const todoFeatureKey = 'todo';
 
@@ -26,21 +26,31 @@ export const reducer = createReducer(
     itemsNumber: payload.itemsNumber
   })),
   on(addTodo, state => ({ ...state })),
-  //on(onEditTodo, state => ({ ...state })),
-  on(onEditTodo, (state, payload) => {
-    const items: Todo[] = []
-    state.items.forEach(item => {
-      if (item === payload.data) {
-        items.push({ ...item, inEdit: true })
-      } else {
-        items.push(item)
-      }
-    });
-    return { ...state, items };
-  }),
   on(addTodoSuccess, (state, payload) => ({
     ...state,
     items: [...state.items, payload.data],
     itemsNumber: [...state.items, payload.data].length
-  }))
+  })),
+  on(onEditTodo, (state, payload) => {
+    const items: Todo[] = [];
+    state.items.forEach(item => {
+      if (item === payload.data) {
+        items.push({ ...item, inEdit: true });
+      } else {
+        items.push(item);
+      }
+    });
+    return { ...state, items };
+  }),
+  on(updateTodoSuccess, (state, payload) => {
+    const items: Todo[] = [];
+    state.items.forEach(item => {
+      if (item === payload.originalItem) {
+        items.push({ ...item, inEdit: false, message: payload.new_message });
+      } else {
+        items.push(item);
+      }
+    });
+    return { ...state, items };
+  })
 );

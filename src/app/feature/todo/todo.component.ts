@@ -44,9 +44,9 @@ export class TodoComponent implements OnInit {
     }
   }
 
-  onSave([item, message]: [Todo, string]) {
-    if (message.trim()) {
-      this.store.dispatch(updateTodo({ item, message }));
+  onSave([originalItem, new_message]: [Todo, string]) {
+    if (new_message.trim()) {
+      this.store.dispatch(updateTodo({ originalItem, new_message }));
     }
   }
 

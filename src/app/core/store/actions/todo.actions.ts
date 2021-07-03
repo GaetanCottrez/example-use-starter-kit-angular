@@ -82,12 +82,12 @@ export const deleteTodoFailure = createAction(
 
 export const updateTodo = createAction(
   TodoActionTypes.TODO_UPDATE,
-  props<{ item: Todo, message: string }>()
+  props<{ originalItem: Todo, new_message: string }>()
 );
 
 export const updateTodoSuccess = createAction(
   TodoActionTypes.TODO_UPDATE_SUCCESS,
-  props<{ item: Todo, new_message: string }>()
+  props<{ originalItem: Todo, new_message: string }>()
 );
 
 export const updateTodoFailure = createAction(
