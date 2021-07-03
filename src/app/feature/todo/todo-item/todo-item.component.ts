@@ -1,8 +1,16 @@
-import { Component, ElementRef, EventEmitter, HostBinding, Input, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  Input,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { Todo } from '../../../core/interfaces/todo';
-import {onEditTodo, updateTodo} from "../../../core/store/actions/todo.actions";
-import {Store} from "@ngrx/store";
-import {AppState} from "../../../core/store/interfaces/app-state";
+import { onEditTodo } from '../../../core/store/actions/todo.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../core/store/interfaces/app-state';
 
 @Component({
   selector: 'td-todo-item',
@@ -10,10 +18,11 @@ import {AppState} from "../../../core/store/interfaces/app-state";
   styleUrls: ['./todo-item.component.scss']
 })
 export class TodoItemComponent {
+  constructor(public store: Store<AppState>) {}
 
-  constructor(public store: Store<AppState>){}
-
-  @ViewChild('input', { static: false }) input: ElementRef = new ElementRef(null);
+  @ViewChild('input', { static: false }) input: ElementRef = new ElementRef(
+    null
+  );
   @HostBinding('class.completed')
   get completed() {
     return this.item.completed;
@@ -40,5 +49,4 @@ export class TodoItemComponent {
   onToggleComplete(item: Todo, completed: boolean) {
     this.toggleComplete.emit([item, completed]);
   }
-
 }

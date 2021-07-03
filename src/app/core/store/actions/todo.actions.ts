@@ -55,12 +55,12 @@ export const addTodoFailure = createAction(
 
 export const toggleTodo = createAction(
   TodoActionTypes.TODO_TOGGLE,
-  props<{ item: Todo, completed: boolean }>()
+  props<{ item: Todo; completed: boolean }>()
 );
 
 export const toggleTodoSuccess = createAction(
   TodoActionTypes.TODO_TOGGLE_SUCCESS,
-  props<{ originalItem: Todo, completed: boolean }>()
+  props<{ originalItem: Todo; completed: boolean }>()
 );
 
 export const toggleTodoFailure = createAction(

@@ -1,4 +1,4 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { TodoState } from '../interfaces/todo-state';
 import {
   addTodo,
@@ -7,10 +7,11 @@ import {
   deleteTodoSuccess,
   loadTodos,
   loadTodosSuccess,
-  onEditTodo, toggleTodo, toggleTodoSuccess,
+  onEditTodo,
+  toggleTodo,
+  toggleTodoSuccess,
   updateTodoSuccess
 } from '../actions/todo.actions';
-import { tap } from 'rxjs/operators';
 import { Todo } from '../../interfaces/todo';
 
 export const todoFeatureKey = 'todo';

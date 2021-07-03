@@ -1,4 +1,4 @@
-import {Todo} from "../../core/interfaces/todo";
+import { Todo } from '../../core/interfaces/todo';
 
 export const todos: Todo[] = [
   {
@@ -30,5 +30,5 @@ export const todos: Todo[] = [
     completed: false,
     deleted: false,
     inEdit: false
-  },
+  }
 ];

@@ -1,18 +1,12 @@
-import {
-  ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
-  MetaReducer
-} from '@ngrx/store';
+import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { environment } from '../../../../environments/environment';
-import { AppState } from '../interfaces/app-state'
-import {reducer as TodoReducer} from "./todo.reducer";
+import { AppState } from '../interfaces/app-state';
+import { reducer as TodoReducer } from './todo.reducer';
 
 export const appStateFeatureKey = 'appState';
 
 export const reducers: ActionReducerMap<AppState> = {
-  todo: TodoReducer,
+  todo: TodoReducer
 };
 
 // console.log all actions
@@ -25,4 +19,6 @@ export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   };
 }
 
-export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [debug] : [];
+export const metaReducers: MetaReducer<AppState>[] = !environment.production
+  ? [debug]
+  : [];

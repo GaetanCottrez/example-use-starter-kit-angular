@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ThemeService} from "../../core/theme/theme.service";
+import { ThemeService } from '../../core/theme/theme.service';
 
 @Component({
   selector: 'app-view-template',
@@ -7,8 +7,7 @@ import {ThemeService} from "../../core/theme/theme.service";
   styleUrls: ['./view-template.component.scss']
 })
 export class ViewTemplateComponent {
-  constructor(private themeService: ThemeService) {
-  }
+  constructor(private themeService: ThemeService) {}
 
   toggleTheme() {
     this.themeService.toggleTheme();

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import {TodoComponent} from "./todo/todo.component";
+import { TodoComponent } from './todo/todo.component';
 import {
   NbButtonModule,
   NbCardModule,
@@ -8,17 +8,14 @@ import {
   NbInputModule,
   NbListModule,
   NbSelectModule
-} from "@nebular/theme";
-import {TodoItemComponent} from "./todo/todo-item/todo-item.component";
-import {CommonModule} from "@angular/common";
-import {NbEvaIconsModule} from "@nebular/eva-icons";
-import {FormsModule} from "@angular/forms";
+} from '@nebular/theme';
+import { TodoItemComponent } from './todo/todo-item/todo-item.component';
+import { CommonModule } from '@angular/common';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    TodoComponent,
-    TodoItemComponent
-  ],
+  declarations: [TodoComponent, TodoItemComponent],
   imports: [
     NbCardModule,
     NbListModule,
