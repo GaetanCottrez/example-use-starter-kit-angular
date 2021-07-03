@@ -3,9 +3,11 @@ import { TodoState } from '../interfaces/todo-state';
 import {
   addTodo,
   addTodoSuccess,
+  deleteTodo,
+  deleteTodoSuccess,
   loadTodos,
   loadTodosSuccess,
-  onEditTodo,
+  onEditTodo, toggleTodo, toggleTodoSuccess,
   updateTodoSuccess
 } from '../actions/todo.actions';
 import { tap } from 'rxjs/operators';
@@ -22,14 +24,12 @@ export const reducer = createReducer(
   on(loadTodos, state => ({ ...state })),
   on(loadTodosSuccess, (state, payload) => ({
     ...state,
-    items: payload.items,
-    itemsNumber: payload.itemsNumber
+    items: payload.items
   })),
   on(addTodo, state => ({ ...state })),
   on(addTodoSuccess, (state, payload) => ({
     ...state,
-    items: [...state.items, payload.data],
-    itemsNumber: [...state.items, payload.data].length
+    items: [...state.items, payload.data]
   })),
   on(onEditTodo, (state, payload) => {
     const items: Todo[] = [];
@@ -48,6 +48,28 @@ export const reducer = createReducer(
       if (item === payload.originalItem) {
         items.push({ ...item, inEdit: false, message: payload.new_message });
       } else {
+        items.push(item);
+      }
+    });
+    return { ...state, items };
+  }),
+  on(toggleTodo, state => ({ ...state })),
+  on(toggleTodoSuccess, (state, payload) => {
+    const items: Todo[] = [];
+    state.items.forEach(item => {
+      if (item === payload.originalItem) {
+        items.push({ ...item, completed: payload.completed });
+      } else {
+        items.push(item);
+      }
+    });
+    return { ...state, items };
+  }),
+  on(deleteTodo, state => ({ ...state })),
+  on(deleteTodoSuccess, (state, payload) => {
+    const items: Todo[] = [];
+    state.items.forEach(item => {
+      if (item !== payload.data) {
         items.push(item);
       }
     });

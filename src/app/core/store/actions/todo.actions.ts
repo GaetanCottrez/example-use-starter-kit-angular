@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import {Todo} from "../../interfaces/todo";
+import { Todo } from '../../interfaces/todo';
 
 export enum TodoActionTypes {
   TODO_LOAD = '[Todo] Load Todos',
@@ -18,16 +18,14 @@ export enum TodoActionTypes {
   TODO_ON_EDIT_FAILLURE = '[Todo] Todo On Edit Failure',
   TODO_UPDATE = '[Todo] Update Todo',
   TODO_UPDATE_SUCCESS = '[Todo] Update Todo Success',
-  TODO_UPDATE_FAILLURE = '[Todo] Update Todo Failure',
+  TODO_UPDATE_FAILLURE = '[Todo] Update Todo Failure'
 }
 
-export const loadTodos = createAction(
-  TodoActionTypes.TODO_LOAD
-);
+export const loadTodos = createAction(TodoActionTypes.TODO_LOAD);
 
 export const loadTodosSuccess = createAction(
   TodoActionTypes.TODO_LOAD_SUCCESS,
-  props<{ items: Todo[], itemsNumber: number }>()
+  props<{ items: Todo[] }>()
 );
 
 export const loadTodosFailure = createAction(
@@ -37,7 +35,12 @@ export const loadTodosFailure = createAction(
 
 export const addTodo = createAction(
   TodoActionTypes.TODO_ADD,
-  props<{ message: string, completed: boolean, deleted: boolean, inEdit: boolean}>()
+  props<{
+    message: string;
+    completed: boolean;
+    deleted: boolean;
+    inEdit: boolean;
+  }>()
 );
 
 export const addTodoSuccess = createAction(
@@ -52,12 +55,12 @@ export const addTodoFailure = createAction(
 
 export const toggleTodo = createAction(
   TodoActionTypes.TODO_TOGGLE,
-  props<{ text: string }>()
+  props<{ item: Todo, completed: boolean }>()
 );
 
 export const toggleTodoSuccess = createAction(
   TodoActionTypes.TODO_TOGGLE_SUCCESS,
-  props<{ data: Todo }>()
+  props<{ originalItem: Todo, completed: boolean }>()
 );
 
 export const toggleTodoFailure = createAction(
@@ -67,7 +70,7 @@ export const toggleTodoFailure = createAction(
 
 export const deleteTodo = createAction(
   TodoActionTypes.TODO_DELETE,
-  props<{ text: string }>()
+  props<{ item: Todo }>()
 );
 
 export const deleteTodoSuccess = createAction(
@@ -82,12 +85,12 @@ export const deleteTodoFailure = createAction(
 
 export const updateTodo = createAction(
   TodoActionTypes.TODO_UPDATE,
-  props<{ originalItem: Todo, new_message: string }>()
+  props<{ originalItem: Todo; new_message: string }>()
 );
 
 export const updateTodoSuccess = createAction(
   TodoActionTypes.TODO_UPDATE_SUCCESS,
-  props<{ originalItem: Todo, new_message: string }>()
+  props<{ originalItem: Todo; new_message: string }>()
 );
 
 export const updateTodoFailure = createAction(

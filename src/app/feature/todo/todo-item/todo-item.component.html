@@ -1,4 +1,4 @@
-<nb-checkbox [attr.disabled]="item.inEdit" value="item.completed" valueChange="onToggleComplete(item, $event)">
+<nb-checkbox [attr.disabled]="item.inEdit" value="item.completed" (checkedChange)="onToggleComplete(item, $event)">
 </nb-checkbox>
 
 <ng-container *ngIf="!item.inEdit">{{ item.message }}</ng-container>

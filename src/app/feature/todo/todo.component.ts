@@ -10,7 +10,8 @@ import {
 } from '../../core/store/selectors/todo.selectors';
 import {
   addTodo,
-  loadTodos,
+  deleteTodo,
+  loadTodos, toggleTodo,
   updateTodo
 } from '../../core/store/actions/todo.actions';
 
@@ -51,10 +52,11 @@ export class TodoComponent implements OnInit {
   }
 
   onToggleCompleted([item, completed]: [Todo, boolean]) {
-    this.todoService.toggleCompleted(item, completed);
+    console.log('je passe')
+    this.store.dispatch(toggleTodo({ item, completed }));
   }
 
   onDelete(item: Todo) {
-    this.todoService.delete(item);
+    this.store.dispatch(deleteTodo({ item }));
   }
 }
