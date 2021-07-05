@@ -7,7 +7,7 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import { Todo } from '../../../core/interfaces/todo';
+import { TodoInterface } from '../todo.interface';
 import { onEditTodo } from '../../../core/store/actions/todo.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../core/store/interfaces/app-state';
@@ -28,25 +28,25 @@ export class TodoItemComponent {
     return this.item.completed;
   }
 
-  @Input() item: Todo = {};
-  @Output() save = new EventEmitter<[Todo, string]>();
-  @Output() delete = new EventEmitter<Todo>();
-  @Output() toggleComplete = new EventEmitter<[Todo, boolean]>();
+  @Input() item: TodoInterface = {};
+  @Output() save = new EventEmitter<[TodoInterface, string]>();
+  @Output() delete = new EventEmitter<TodoInterface>();
+  @Output() toggleComplete = new EventEmitter<[TodoInterface, boolean]>();
 
-  onEdit(item: Todo) {
+  onEdit(item: TodoInterface) {
     this.store.dispatch(onEditTodo({ data: item }));
   }
 
-  onSave(item: Todo, message: string) {
+  onSave(item: TodoInterface, message: string) {
     //item.inEdit = false;
     this.save.emit([item, message]);
   }
 
-  onDelete(item: Todo) {
+  onDelete(item: TodoInterface) {
     this.delete.emit(item);
   }
 
-  onToggleComplete(item: Todo, completed: boolean) {
+  onToggleComplete(item: TodoInterface, completed: boolean) {
     this.toggleComplete.emit([item, completed]);
   }
 }

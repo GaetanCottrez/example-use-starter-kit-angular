@@ -1,8 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 
-import { Todo } from '../../core/interfaces/todo';
-import { todos } from './mock-todos';
+import { TodoInterface } from './todo.interface';
+import {
+  APP_NET_PROVIDER,
+  NetProvider
+} from '../../core/interfaces/net-provider';
 
 export type Filter = 'all' | 'completed' | 'active';
 
@@ -10,42 +13,52 @@ export type Filter = 'all' | 'completed' | 'active';
   providedIn: 'root'
 })
 export class TodoService {
-  private items$ = new BehaviorSubject<Todo[]>(todos);
+  private items$ = new BehaviorSubject<TodoInterface[]>([]);
 
-  load(): Observable<Todo[]> {
-    return of(todos);
+  constructor(@Inject(APP_NET_PROVIDER) private net: NetProvider) {}
+
+  load(): Observable<TodoInterface[]> {
+    const todos = this.net.get<TodoInterface>('http://127.0.0.1:5050/todos');
+    todos.subscribe(data => this.items$.next(data));
+    return todos;
   }
 
-  add(item: Todo) {
+  add(item: TodoInterface) {
     this.items$.next([...this.items$.getValue(), item]);
   }
 
-  updateMessage(editedItem: Todo, message: string) {
-    const newItems: Todo[] = this.items$.getValue().map((item: Todo) => {
-      if (item === editedItem) {
-        return { ...item, message };
-      }
-      return item;
-    });
+  updateMessage(editedItem: TodoInterface, message: string) {
+    const newItems: TodoInterface[] = this.items$
+      .getValue()
+      .map((item: TodoInterface) => {
+        if (item === editedItem) {
+          return { ...item, message };
+        }
+        return item;
+      });
 
     this.items$.next(newItems);
   }
 
-  toggleCompleted(toggledItem: Todo, completed: boolean) {
-    const newItems: Todo[] = this.items$.getValue().map((item: Todo) => {
-      if (item === toggledItem && item.completed !== completed) {
-        return { ...item, completed };
-      }
-      return item;
-    });
+  toggleCompleted(toggledItem: TodoInterface, completed: boolean) {
+    const newItems: TodoInterface[] = this.items$
+      .getValue()
+      .map((item: TodoInterface) => {
+        if (item === toggledItem && item.completed !== completed) {
+          return { ...item, completed };
+        }
+        return item;
+      });
 
     this.items$.next(newItems);
   }
 
-  delete(deletedItem: Todo) {
-    const newItems: Todo[] = this.items$.getValue().filter((item: Todo) => {
-      return item !== deletedItem;
-    });
+  delete(deletedItem: TodoInterface) {
+    const newItems: TodoInterface[] = this.items$
+      .getValue()
+      .filter((item: TodoInterface) => {
+        return item !== deletedItem;
+      });
 
     this.items$.next(newItems);
   }

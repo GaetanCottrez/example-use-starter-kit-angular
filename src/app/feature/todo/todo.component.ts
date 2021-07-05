@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Todo } from '../../core/interfaces/todo';
-import { Filter, TodoService } from './todo.service';
+import { TodoInterface } from './todo.interface';
+import { Filter } from './todo.service';
 import { AppState } from '../../core/store/interfaces/app-state';
 import { Store } from '@ngrx/store';
 import {
@@ -26,10 +26,10 @@ import {
   styleUrls: ['./todo.component.scss']
 })
 export class TodoComponent implements OnInit {
-  items$: Observable<Todo[]>;
+  items$: Observable<TodoInterface[]>;
   itemsNumber$: Observable<number>;
 
-  constructor(public store: Store<AppState>, private todoService: TodoService) {
+  constructor(public store: Store<AppState>) {
     this.items$ = this.store.select(selectItems);
     this.itemsNumber$ = this.store.select(selectItemsCount);
   }
@@ -65,17 +65,17 @@ export class TodoComponent implements OnInit {
     }
   }
 
-  onSave([originalItem, new_message]: [Todo, string]) {
+  onSave([originalItem, new_message]: [TodoInterface, string]) {
     if (new_message.trim()) {
       this.store.dispatch(updateTodo({ originalItem, new_message }));
     }
   }
 
-  onToggleCompleted([item, completed]: [Todo, boolean]) {
+  onToggleCompleted([item, completed]: [TodoInterface, boolean]) {
     this.store.dispatch(toggleTodo({ item, completed }));
   }
 
-  onDelete(item: Todo) {
+  onDelete(item: TodoInterface) {
     this.store.dispatch(deleteTodo({ item }));
   }
 }

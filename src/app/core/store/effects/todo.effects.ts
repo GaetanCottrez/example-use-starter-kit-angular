@@ -20,7 +20,7 @@ import { of } from 'rxjs';
 import { TodoService } from '../../../feature/todo/todo.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../interfaces/app-state';
-import { Todo } from '../../interfaces/todo';
+import { TodoInterface } from '../../../feature/todo/todo.interface';
 
 @Injectable()
 export class TodoEffects {
@@ -30,7 +30,7 @@ export class TodoEffects {
       mergeMap(() =>
         this.todoService.load().pipe(
           map(items => loadTodosSuccess({ items: items })),
-          catchError(error => of(loadTodosFailure({ error })))
+          catchError(error => of(loadTodosFailure({ error: error.message })))
         )
       )
     )
@@ -39,9 +39,9 @@ export class TodoEffects {
   addItem$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TodoActionTypes.TODO_ADD),
-      tap((item: Todo) => this.todoService.add(item)),
-      map((item: Todo) => addTodoSuccess({ data: item })),
-      catchError(error => of(addTodoFailure({ error })))
+      tap((item: TodoInterface) => this.todoService.add(item)),
+      map((item: TodoInterface) => addTodoSuccess({ data: item })),
+      catchError(error => of(addTodoFailure({ error: error.message })))
     )
   );
 
@@ -50,8 +50,8 @@ export class TodoEffects {
       this.actions$.pipe(
         ofType(TodoActionTypes.TODO_ON_EDIT),
         tap(console.log),
-        tap((item: Todo) => onEditTodo({ data: item })),
-        catchError(error => of(onEditTodoFailure({ error })))
+        tap((item: TodoInterface) => onEditTodo({ data: item })),
+        catchError(error => of(onEditTodoFailure({ error: error.message })))
       ),
     { dispatch: false }
   );
@@ -72,7 +72,7 @@ export class TodoEffects {
           new_message: payload.new_message
         })
       ),
-      catchError(error => of(updateTodoFailure({ error })))
+      catchError(error => of(updateTodoFailure({ error: error.message })))
     )
   );
 
@@ -82,7 +82,7 @@ export class TodoEffects {
       tap(console.log),
       tap(payload => this.todoService.delete(payload.item)),
       map(payload => deleteTodoSuccess({ data: payload.item })),
-      catchError(error => of(deleteTodoFailure({ error })))
+      catchError(error => of(deleteTodoFailure({ error: error.message })))
     )
   );
 
@@ -99,7 +99,7 @@ export class TodoEffects {
           completed: payload.completed
         })
       ),
-      catchError(error => of(toggleTodoFailure({ error })))
+      catchError(error => of(toggleTodoFailure({ error: error.message })))
     )
   );
 

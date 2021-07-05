@@ -1,3 +1,6 @@
+<nb-alert status="danger" *ngIf="error">
+  An error has occurred : {{error}}
+</nb-alert>
 <nb-layout>
   <nb-layout-header>
     <button nbButton (click)="toggleTheme()" status="primary">

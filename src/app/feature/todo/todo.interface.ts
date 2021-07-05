@@ -1,4 +1,4 @@
-export interface Todo {
+export interface TodoInterface {
   completed?: boolean;
   deleted?: boolean;
   inEdit?: boolean;

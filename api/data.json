@@ -1,18 +1,34 @@
 {
-  "messages": [
+  "todos": [
     {
-      "id": 1,
-      "text": "Mon message 1",
-      "author": {
-        "name": "John Doe"
-      }
+      "message": "Create Nebular TODO demo application",
+      "completed": true,
+      "deleted": false,
+      "inEdit": false
     },
     {
-      "id": 2,
-      "text": "mon message 2",
-      "author": {
-        "name": "John Wick"
-      }
+      "message": "Deploy to GitHub",
+      "completed": true,
+      "deleted": false,
+      "inEdit": false
+    },
+    {
+      "message": "Add Firebase integration example",
+      "completed": false,
+      "deleted": false,
+      "inEdit": false
+    },
+    {
+      "message": "Add Dark Theme mode",
+      "completed": true,
+      "deleted": false,
+      "inEdit": false
+    },
+    {
+      "message": "Start working on Nebular 5",
+      "completed": false,
+      "deleted": false,
+      "inEdit": false
     }
   ],
   "tasks": [

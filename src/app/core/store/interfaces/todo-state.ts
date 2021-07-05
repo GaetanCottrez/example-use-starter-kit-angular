@@ -1,5 +1,6 @@
-import { Todo } from '../../interfaces/todo';
+import { TodoInterface } from '../../../feature/todo/todo.interface';
 
 export interface TodoState {
-  items: Todo[];
+  items: TodoInterface[];
+  error?: any
 }

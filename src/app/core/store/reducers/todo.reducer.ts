@@ -5,19 +5,20 @@ import {
   addTodoSuccess,
   deleteTodo,
   deleteTodoSuccess,
-  loadTodos,
+  loadTodos, loadTodosFailure,
   loadTodosSuccess,
   onEditTodo,
   toggleTodo,
   toggleTodoSuccess,
   updateTodoSuccess
 } from '../actions/todo.actions';
-import { Todo } from '../../interfaces/todo';
+import { TodoInterface } from '../../../feature/todo/todo.interface';
 
 export const todoFeatureKey = 'todo';
 
 export const initialState: TodoState = {
-  items: []
+  items: [],
+  error: false
 };
 
 export const reducer = createReducer(
@@ -27,13 +28,20 @@ export const reducer = createReducer(
     ...state,
     items: payload.items
   })),
+  on(loadTodosFailure, (state, payload) => {
+    console.log(payload)
+    return {
+      ...state,
+      error: payload.error
+    };
+  }),
   on(addTodo, state => ({ ...state })),
   on(addTodoSuccess, (state, payload) => ({
     ...state,
     items: [...state.items, payload.data]
   })),
   on(onEditTodo, (state, payload) => {
-    const items: Todo[] = [];
+    const items: TodoInterface[] = [];
     state.items.forEach(item => {
       if (item === payload.data) {
         items.push({ ...item, inEdit: true });
@@ -44,7 +52,7 @@ export const reducer = createReducer(
     return { ...state, items };
   }),
   on(updateTodoSuccess, (state, payload) => {
-    const items: Todo[] = [];
+    const items: TodoInterface[] = [];
     state.items.forEach(item => {
       if (item === payload.originalItem) {
         items.push({ ...item, inEdit: false, message: payload.new_message });
@@ -56,7 +64,7 @@ export const reducer = createReducer(
   }),
   on(toggleTodo, state => ({ ...state })),
   on(toggleTodoSuccess, (state, payload) => {
-    const items: Todo[] = [];
+    const items: TodoInterface[] = [];
     state.items.forEach(item => {
       if (item === payload.originalItem) {
         items.push({ ...item, completed: payload.completed });
@@ -68,7 +76,7 @@ export const reducer = createReducer(
   }),
   on(deleteTodo, state => ({ ...state })),
   on(deleteTodoSuccess, (state, payload) => {
-    const items: Todo[] = [];
+    const items: TodoInterface[] = [];
     state.items.forEach(item => {
       if (item !== payload.data) {
         items.push(item);
