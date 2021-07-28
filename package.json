@@ -7,6 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:cov": "ng test --codeCoverage=true --watch=false",
+    "test:e2e": "ng e2e",
     "api": "json-server ./api/data.json -p 5050 -w",
     "doc:dashboard": "compodoc -p ./tsconfig.doc.json -s",
     "prerender": "ng run angular-starter-kit:prerender"
